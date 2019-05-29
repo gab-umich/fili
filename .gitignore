@@ -15,6 +15,9 @@
 target
 out
 
+# Config.json files should be build from scratch in general
+config/external
+
 # Ignore generated jars
 *-system-config-*.jar
 
