@@ -52,10 +52,12 @@ function M.build_dimensions_config(dimensions)
     local configuration = {}
     for name, dimension in pairs(dimensions) do
         local dim_copy = misc.shallow_copy(dimension)
+        -- even though apiName is technically duplicated information,
+        -- we still want to keep this consistent in generating dimensions.
         dim_copy.apiName = dim_copy.apiName or name
         dim_copy.longName = dim_copy.longName or name
         dim_copy.description = dim_copy.description or name
-        table.insert(configuration, dim_copy)
+        configuration[dim_copy.apiName] = dim_copy
     end
     return configuration
 end
