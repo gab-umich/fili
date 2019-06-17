@@ -93,7 +93,7 @@ public class KeyValueStoreDimensionFactory implements Factory<Dimension> {
                 configTable.get("description").textValue()
         );
         SearchProvider searchProvider = resourceFactories.getSearchProvider(
-                configTable.get("searchProvider").textValue()
+                configTable.get("domain").textValue()
         );
         LinkedHashSet<DimensionField> dimensionFields = new LinkedHashSet<>();
         LinkedHashSet<DimensionField> defaultDimensionFields = new LinkedHashSet<>();
