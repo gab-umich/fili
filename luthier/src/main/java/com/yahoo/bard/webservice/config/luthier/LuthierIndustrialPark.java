@@ -76,6 +76,9 @@ public class LuthierIndustrialPark implements ConfigurationLoader {
 
     /**
      * Bare minimum that can work.
+     *
+     * @param domain name of the domain
+     * @return a searchProvider that is built from the domain name, according to the SearchProviderConfig.json
      */
     public SearchProvider getSearchProvider(String domain) {
         Supplier<ObjectNode> searchProviderConfig = new ResourceNodeSupplier("SearchProviderConfig.json");
@@ -86,6 +89,7 @@ public class LuthierIndustrialPark implements ConfigurationLoader {
         }
         try {
             String type = config.get("type").textValue();
+            Class searchProviderClass = Class.forName(type);
             switch (type) {
                 case "com.yahoo.bard.webservice.data.dimension.impl.NoOpSearchProvider":
                     int queryWeightLimit = config.get("queryWeightLimit").intValue();
@@ -104,7 +108,7 @@ public class LuthierIndustrialPark implements ConfigurationLoader {
                     String message = String.format(UNKNOWN_SEARCH_PROVIDER, type, domain);
                     throw new LuthierFactoryException(message);
             }
-        } catch (NullPointerException e) {
+        } catch (ClassNotFoundException | NullPointerException e) {
             String message = String.format(FORMAT_MISMATCH, domain);
             throw new LuthierFactoryException(message, e);
         }
