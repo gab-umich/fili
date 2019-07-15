@@ -29,7 +29,7 @@ import java.util.stream.Collectors;
  *
  * A KeyValueStoreDimensionFactory expects the following fields in its configuration:
  *
- * Required Fields: 
+ * Required Fields:
  * <ol>
  *  <li> {@code longName} - Text. Longer, human friendly name for the dimension.
  *  <li> {@code category} - Text. Category of the dimension for human/external tool consumption.
